@@ -3,6 +3,8 @@ require_once '../db/Connection.php';
 
 $sql = "SELECT id_karyawan, nama_karyawan, alamat, tgl_lahir, bidang_layanan, CASE WHEN gender_id_gender = '1' THEN 'Laki-Laki' ELSE 'Perempuan' END AS gender FROM karyawan";
 $query = mysqli_query($koneksi, $sql);
+
+$count = 1;
 ?>
 
 <?php require_once '../config/header.php' ?>
@@ -55,37 +57,47 @@ $query = mysqli_query($koneksi, $sql);
 
 			<h2 class="mb-4">Data Karyawan Laundry</h2>
 			<table class="table table-hover table-bordered table-md w-100 text-center">
-			<div class="w-100 d-flex justify-content-end mb-3" style="gap: 1rem;">
-				<a href="../controllers/Employee/tambah_karyawan.php" class="btn btn-primary">Tambah</a>
-			</div>
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Nama</th>
-      <th scope="col">Alamat</th>
-      <th scope="col">Tanggal Lahir</th>
-      <th scope="col">Bidang Layanan</th>
-	  <th scope="col">Gender</th>
-	  <th scope="col">Aksi</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php while($karyawan = mysqli_fetch_assoc($query)) { ?>
-        <tr>
-            <td scope="row"><?= $karyawan['id_karyawan'] ?></td>
-            <td><?= $karyawan['nama_karyawan'] ?></td>
-            <td><?= $karyawan['alamat'] ?></td>
-			<td><?= $karyawan['tgl_lahir'] ?></td>
-			<td><?= $karyawan['bidang_layanan'] ?></td>
-			<td><?= $karyawan['gender'] ?></td>
-            <td style="display: flex; justify-content: center; align-items: center; gap: 1.5rem;">
-                <a class="btn btn-warning" href="../controllers/Employee/edit_karyawan.php?id_karyawan=<?= $karyawan['id_karyawan'] ?>">Edit</a>
-                <a class="btn btn-danger" href="../controllers/Employee/hapus_karyawan.php?id_karyawan=<?= $karyawan['id_karyawan'] ?>">Hapus</a>
-            </td>
-        </tr>
-    <?php } ?>
-  </tbody>
-</table>
+				<div class="w-100 d-flex justify-content-between mb-3" style="gap: 1rem;">
+					<div class="fs-2">Manajemen Data Karyawan Laundry</div>
+					<a href="../controllers/Employee/tambah_karyawan.php" class="btn btn-primary">Tambah</a>
+				</div>
+				<thead>
+					<tr>
+						<th scope="col">No</th>
+						<th scope="col">Nama</th>
+						<th scope="col">Alamat</th>
+						<th scope="col">Tanggal Lahir</th>
+						<th scope="col">Bidang Layanan</th>
+						<th scope="col">Gender</th>
+						<th scope="col">Aksi</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php while($karyawan = mysqli_fetch_assoc($query)) { ?>
+					<tr>
+						<td scope="row">
+							<?= $count ?>
+						</td>
+						<td><?= $karyawan['nama_karyawan'] ?>
+						</td>
+						<td><?= $karyawan['alamat'] ?>
+						</td>
+						<td><?= $karyawan['tgl_lahir'] ?>
+						</td>
+						<td><?= $karyawan['bidang_layanan'] ?>
+						</td>
+						<td><?= $karyawan['gender'] ?>
+						</td>
+						<td style="display: flex; justify-content: center; align-items: center; gap: 1rem;">
+							<a class="btn btn-warning"
+								href="../controllers/Employee/edit_karyawan.php?id_karyawan=<?= $karyawan['id_karyawan'] ?>">Edit</a>
+							<a class="btn btn-danger"
+								href="../controllers/Employee/hapus_karyawan.php?id_karyawan=<?= $karyawan['id_karyawan'] ?>">Hapus</a>
+						</td>
+					</tr>
+					<?php $count++; } ?>
+				</tbody>
+			</table>
 		</div>
 	</div>
 	<script src="../js/jquery.min.js"></script>
