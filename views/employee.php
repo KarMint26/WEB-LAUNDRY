@@ -65,7 +65,7 @@ $count = 1;
 						<div>Tambah Karyawan</div>
 					</a>
 				</div>
-				<thead>
+				<thead class="thead-dark">
 					<tr>
 						<th scope="col">No</th>
 						<th scope="col">Nama</th>
