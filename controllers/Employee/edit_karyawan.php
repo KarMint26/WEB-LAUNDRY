@@ -5,6 +5,9 @@ $id_karyawan = $_GET['id_karyawan'];
 $sql = "SELECT * FROM karyawan WHERE id_karyawan='$id_karyawan'";
 $query = mysqli_query($koneksi, $sql);
 
+$sql_q = "SELECT nama_layanan FROM jenis_layanan";
+$layanan = mysqli_query($koneksi, $sql_q);
+
 ?>
 
 <?php require_once '../../config/header.php' ?>
@@ -16,7 +19,7 @@ $query = mysqli_query($koneksi, $sql);
 <body>
 	<div class="wrapper d-flex align-items-stretch">
 		<nav id="sidebar" class="active">
-			<h1><a href="../index.php" class="logo">L.</a></h1>
+			<h1><a href="../../index.php" class="logo">L.</a></h1>
 			<ul class="list-unstyled components mb-5">
 				<li class="active">
 					<a href="../../index.php"><span class="fa fa-home"></span> Home</a>
@@ -58,8 +61,8 @@ $query = mysqli_query($koneksi, $sql);
 			<?php while($karyawan = mysqli_fetch_assoc($query)) { ?>
 
 			<h2 class="mb-4">Edit Karyawan Laundry</h2>
-			<form action="./proses_edit.php" method="GET">
-				<input type="text" name="id_karyawan" hidden
+			<form action="./proses_edit.php" method="POST" onsubmit="event.preventDefault(); submitForm();">
+				<input id="idkry" type="text" name="id_karyawan" hidden
 					value="<?= $karyawan['id_karyawan'] ?>">
 				<div class="mb-3 mt-3">
 					<label for="nama" class="form-label">Nama</label>
@@ -79,34 +82,21 @@ $query = mysqli_query($koneksi, $sql);
 				<div class="mb-3 d-flex flex-column">
 					<label for="bdlayanan" class="form-label">Bidang Layanan</label>
 					<select class="custom-select" aria-label="Default select example" id="bdlayanan" name="bdlayanan">
-						<option value="">Pilih Bidang Layanan</option>
-						<option value="Setrika" <?php if ($karyawan['bidang_layanan'] == "Setrika") {
-						    echo 'selected';
-						} ?>>Setrika
+						<option disabled>Pilih Bidang Layanan</option>
+						<?php while($nama_layanan = mysqli_fetch_assoc($layanan)) { ?>
+						<option
+							value="<?= $nama_layanan['nama_layanan'] ?>"
+							<?php if ($karyawan['bidang_layanan'] == $nama_layanan['nama_layanan']) {
+							    echo 'selected';
+							} ?>><?= $nama_layanan['nama_layanan'] ?>
 						</option>
-						<option value="Cuci Kering" <?php if ($karyawan['bidang_layanan'] == "Cuci Kering") {
-						    echo 'selected';
-						} ?>>Cuci
-							Kering</option>
-						<option value="Cuci Biasa" <?php if ($karyawan['bidang_layanan'] == "Cuci Biasa") {
-						    echo 'selected';
-						} ?>>Cuci
-							Biasa</option>
-						<option value="Layanan Pengharuman" <?php if ($karyawan['bidang_layanan'] == "Layanan Pengharuman") {
-						    echo 'selected';
-						} ?>>Layanan
-							Pengharuman</option>
-						<option value="Layanan Pengantaran" <?php if ($karyawan['bidang_layanan'] == "Layanan Pengantaran") {
-						    echo 'selected';
-						} ?>>Layanan
-							Pengantaran</option>
+						<?php } ?>
 					</select>
-
 				</div>
 				<div class="mb-3 d-flex flex-column">
 					<label for="gender" class="form-label">Jenis Kelamin</label>
 					<select class="custom-select" aria-label="Default select example" id="gender" name="gender">
-						<option value="">Pilih Jenis Kelamin</option>
+						<option disabled>Pilih Jenis Kelamin</option>
 						<option value="0" <?php if ($karyawan['gender_id_gender'] == "0") {
 						    echo 'selected';
 						} ?>>Perempuan
@@ -119,7 +109,10 @@ $query = mysqli_query($koneksi, $sql);
 
 				</div>
 				<div class="d-flex justify-content-end">
-					<button type="submit" class="btn btn-success">Simpan</button>
+					<button type="submit" class="btn btn-info d-flex align-items-center" style="gap: .5rem;">
+						<i class="fa fa-external-link"></i>
+						<div>Update Data Karyawan</div>
+					</button>
 				</div>
 			</form>
 
@@ -129,5 +122,49 @@ $query = mysqli_query($koneksi, $sql);
 	<script src="../../js/jquery.min.js"></script>
 	<script src="../../js/popper.js"></script>
 	<script src="../../js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="../../js/main.js"></script>
+	<script>
+		async function submitForm() {
+			// Ambil data dari form
+			const nama = document.getElementById('nama').value;
+			const alamat = document.getElementById('alamat').value;
+			const tgl = document.getElementById('tgl').value;
+			const bdlayanan = document.getElementById('bdlayanan').value;
+			const gender = document.getElementById('gender').value;
+			const idkry = document.getElementById('idkry').value;
+
+			// Kirim permintaan AJAX ke server
+			await fetch('./proses_edit.php', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					body: 'id_karyawan=' + encodeURIComponent(idkry) + '&nama=' + encodeURIComponent(nama) +
+						'&alamat=' + encodeURIComponent(alamat) + '&tgl=' +
+						encodeURIComponent(tgl) + '&bdlayanan=' + encodeURIComponent(bdlayanan) + '&gender=' +
+						encodeURIComponent(gender),
+				})
+				.then(response => response.json())
+				.then(data => {
+					// Tampilkan pesan SweetAlert2 berdasarkan respons
+					if (data.success) {
+						Swal.fire(
+							'Sukses!',
+							'Data berhasil diupdate.',
+							'success'
+						).then((result) => {
+							// Redirect ke halaman lain setelah pengguna menekan OK
+							window.location.href = '../../views/employee.php';
+						});
+					} else {
+						Swal.fire(
+							'Gagal!',
+							'Terjadi kesalahan saat melakukan update data.',
+							'error'
+						);
+					}
+				});
+		}
+	</script>
 	<?php require_once '../../config/footer.php' ?>

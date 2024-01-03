@@ -59,7 +59,11 @@ $count = 1;
 			<table class="table table-hover table-bordered table-md w-100 text-center">
 				<div class="w-100 d-flex justify-content-between mb-3" style="gap: 1rem;">
 					<div class="fs-2">Manajemen Data Karyawan Laundry</div>
-					<a href="../controllers/Employee/tambah_karyawan.php" class="btn btn-primary">Tambah</a>
+					<a href="../controllers/Employee/tambah_karyawan.php"
+						class="btn btn-primary d-flex align-items-center" style="gap: .5rem;">
+						<i class="fa fa-plus"></i>
+						<div>Tambah Karyawan</div>
+					</a>
 				</div>
 				<thead>
 					<tr>
@@ -75,7 +79,7 @@ $count = 1;
 				<tbody>
 					<?php while($karyawan = mysqli_fetch_assoc($query)) { ?>
 					<tr>
-						<td scope="row">
+						<td style="text-align: center;" scope="row">
 							<?= $count ?>
 						</td>
 						<td><?= $karyawan['nama_karyawan'] ?>
@@ -89,13 +93,21 @@ $count = 1;
 						<td><?= $karyawan['gender'] ?>
 						</td>
 						<td style="display: flex; justify-content: center; align-items: center; gap: 1rem;">
-							<a class="btn btn-warning"
-								href="../controllers/Employee/edit_karyawan.php?id_karyawan=<?= $karyawan['id_karyawan'] ?>">Edit</a>
-							<a class="btn btn-danger"
-								href="../controllers/Employee/hapus_karyawan.php?id_karyawan=<?= $karyawan['id_karyawan'] ?>">Hapus</a>
+							<a class="btn btn-warning text-white d-flex align-items-center" style="gap: .3rem;"
+								href="../controllers/Employee/edit_karyawan.php?id_karyawan=<?= $karyawan['id_karyawan'] ?>">
+								<i class="fa fa-edit"></i>
+								<div>Edit</div>
+							</a>
+							<a class="btn btn-danger text-white d-flex align-items-center"
+								style="cursor: pointer; gap: .3rem;"
+								onclick="deleteData(<?= $karyawan['id_karyawan'] ?>);">
+								<i class="fa fa-trash"></i>
+								<div>Hapus</div>
+							</a>
 						</td>
 					</tr>
-					<?php $count++; } ?>
+					<?php $count++;
+					} ?>
 				</tbody>
 			</table>
 		</div>
@@ -103,5 +115,38 @@ $count = 1;
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/popper.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="../js/main.js"></script>
+	<script>
+		async function deleteData(id_kry) {
+			// Kirim permintaan AJAX ke server
+			await fetch('../controllers/Employee/hapus_karyawan.php', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					body: 'id_karyawan=' + encodeURIComponent(id_kry),
+				})
+				.then(response => response.json())
+				.then(data => {
+					// Tampilkan pesan SweetAlert2 berdasarkan respons
+					if (data.success) {
+						Swal.fire(
+							'Sukses!',
+							'Data berhasil dihapus.',
+							'success'
+						).then((result) => {
+							// Redirect ke halaman lain setelah pengguna menekan OK
+							window.location.href = '../views/employee.php';
+						});
+					} else {
+						Swal.fire(
+							'Gagal!',
+							'Terjadi kesalahan saat menghapus data.',
+							'error'
+						);
+					}
+				});
+		}
+	</script>
 	<?php require_once '../config/footer.php' ?>

@@ -1,11 +1,12 @@
 <?php
+
 require_once '../../db/Connection.php';
 
-$nama = $_GET['nama'];
-$alamat = $_GET['alamat'];
-$tgl_lahir = $_GET['tgl'];
-$bidang_layanan = $_GET['bdlayanan'];
-$gender = $_GET['gender'];
+$nama = $_POST['nama'];
+$alamat = $_POST['alamat'];
+$tgl_lahir = $_POST['tgl'];
+$bidang_layanan = $_POST['bdlayanan'];
+$gender = $_POST['gender'];
 
 // Mendapatkan nilai maksimum id_karyawan dari tabel karyawan
 $sql_max_id = "SELECT MAX(id_karyawan) AS max_id FROM karyawan";
@@ -24,12 +25,13 @@ if ($result) {
     $query = mysqli_query($koneksi, $sql);
 
     if ($query) {
-        header("location:../../views/employee.php?simpan=sukses");
+        echo json_encode(['success' => $query]);
+        exit;
     } else {
-        header("location:../../views/employee.php?simpan=gagal");
+        echo json_encode(['failed' => $query]);
+        exit;
     }
 } else {
-    // Jika terjadi kesalahan dalam query untuk mendapatkan nilai maksimum
-    header("location:../../views/employee.php?simpan=gagal");
+    echo json_encode(['failed' => $query]);
+    exit;
 }
-?>
