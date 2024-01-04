@@ -99,7 +99,7 @@ $count = 1;
 								<div>Edit</div>
 							</a>
 							<a class="btn btn-danger text-white d-flex align-items-center"
-								style="cursor: pointer; gap: .3rem;"
+								style="cursor: pointer; gap:.3rem;"
 								onclick="deleteData(<?= $karyawan['id_karyawan'] ?>);">
 								<i class="fa fa-trash"></i>
 								<div>Hapus</div>
