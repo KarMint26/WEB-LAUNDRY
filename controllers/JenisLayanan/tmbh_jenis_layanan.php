@@ -50,7 +50,8 @@
 			<form action="./proses_tambah.php" method="POST" onsubmit="event.preventDefault(); submitForm();">
 				<div class="mb-3 mt-3">
 					<label for="namalayanan" class="form-label">Nama Layanan</label>
-					<input type="text" class="form-control" name="namalayanan" id="namalayanan" placeholder="Cuci Biasa">
+					<input type="text" class="form-control" name="namalayanan" id="namalayanan"
+						placeholder="Cuci Biasa">
 				</div>
 				<div class="mb-3">
 					<label for="harga" class="form-label">Harga</label>
@@ -62,7 +63,8 @@
 				</div>
 				<div class="mb-3">
 					<label for="deskripsi" class="form-label">Deskripsi</label>
-					<input type="text" class="form-control" name="deskripsi" id="deskripsi" placeholder="Pencucian pakaian menggunakan deterjen biasa tanpa perlakuan khusus.">
+					<input type="text" class="form-control" name="deskripsi" id="deskripsi"
+						placeholder="Pencucian pakaian menggunakan deterjen biasa tanpa perlakuan khusus.">
 				</div>
 				<div class="d-flex justify-content-end">
 					<button type="submit" class="btn btn-success">Simpan</button>
@@ -70,8 +72,10 @@
 			</form>
 		</div>
 	</div>
-	<script src="../../js/jquery.min.js"></>
-	<script src="../../js/popper.js"></script>
+	<script src="../../js/jquery.min.js">
+		< /> <
+		script src = "../../js/popper.js" >
+	</script>
 	<script src="../../js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="../../js/main.js"></script>
@@ -89,7 +93,8 @@
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded',
 					},
-					body: 'namalayanan=' + encodeURIComponent(namalayanan) + '&harga=' + encodeURIComponent(harga) + '&estimasihari=' +
+					body: 'namalayanan=' + encodeURIComponent(namalayanan) + '&harga=' + encodeURIComponent(harga) +
+						'&estimasihari=' +
 						encodeURIComponent(estimasihari) + '&deskripsi=' + encodeURIComponent(deskripsi),
 				})
 				.then(response => response.json())

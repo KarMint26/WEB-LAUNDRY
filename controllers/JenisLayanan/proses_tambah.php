@@ -1,4 +1,5 @@
 <?php
+
 require_once '../../db/Connection.php';
 
 $nl = $_POST['namalayanan'];
@@ -34,4 +35,3 @@ if ($result) {
     echo json_encode(['failed' => $query]);
     exit;
 }
-?>

@@ -77,8 +77,9 @@ $query = mysqli_query($koneksi, $sql);
 				</div>
 				<div class="mb-3">
 					<label for="deskripsi" class="form-label">Deskripsi</label>
-					<input type="text" class="form-control" name="deskripsi" id="deskripsi" placeholder="Pencucian pakaian menggunakan deterjen biasa tanpa perlakuan khusus"
-                        value="<?= $jenis_layanan['deskripsi'] ?>">
+					<input type="text" class="form-control" name="deskripsi" id="deskripsi"
+						placeholder="Pencucian pakaian menggunakan deterjen biasa tanpa perlakuan khusus"
+						value="<?= $jenis_layanan['deskripsi'] ?>">
 				</div>
 				<div class="d-flex justify-content-end">
 					<button type="submit" class="btn btn-info d-flex align-items-center" style="gap: .5rem;">
@@ -98,12 +99,12 @@ $query = mysqli_query($koneksi, $sql);
 	<script>
 		async function submitForm() {
 			// Ambil data dari form
-            const idlayanan = document.getElementById('idlayanan').value;
+			const idlayanan = document.getElementById('idlayanan').value;
 			const namalayanan = document.getElementById('namalayanan').value;
 			const harga = document.getElementById('harga').value;
 			const estimasihari = document.getElementById('estimasihari').value;
 			const deskripsi = document.getElementById('deskripsi').value;
-            
+
 
 			// Kirim permintaan AJAX ke server
 			await fetch('./proses_edit_layanan.php', {
@@ -111,7 +112,8 @@ $query = mysqli_query($koneksi, $sql);
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded',
 					},
-					body: 'id_layanan=' + encodeURIComponent(idlayanan) + '&namalayanan=' + encodeURIComponent(namalayanan) +
+					body: 'id_layanan=' + encodeURIComponent(idlayanan) + '&namalayanan=' + encodeURIComponent(
+							namalayanan) +
 						'&harga=' + encodeURIComponent(harga) + '&estimasihari=' +
 						encodeURIComponent(estimasihari) + '&deskripsi=' + encodeURIComponent(deskripsi),
 				})
