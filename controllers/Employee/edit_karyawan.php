@@ -13,7 +13,7 @@ $layanan = mysqli_query($koneksi, $sql_q);
 <?php require_once '../../config/header.php' ?>
 <link rel="stylesheet" href="../../css/style.css">
 <link rel="shortcut icon" href="../../images/washing-machine.ico" type="image/x-icon">
-<title>Home Laundry | Tambah Karyawan</title>
+<title>Home Laundry | Edit Karyawan</title>
 </head>
 
 <body>
@@ -22,7 +22,7 @@ $layanan = mysqli_query($koneksi, $sql_q);
 			<h1><a href="../../index.php" class="logo">L.</a></h1>
 			<ul class="list-unstyled components mb-5">
 				<li class="active">
-					<a href="../../index.php"><span class="fa fa-home"></span> Home</a>
+					<a href="../../index.php"><span class="fa fa-home"></span> Beranda</a>
 				</li>
 				<li>
 					<a href="../../views/customer.php"><span class="fa fa-users"></span> Customer</a>
@@ -155,7 +155,7 @@ $layanan = mysqli_query($koneksi, $sql_q);
 							'success'
 						).then((result) => {
 							// Redirect ke halaman lain setelah pengguna menekan OK
-							window.location.href = '../../views/employee.php';
+							window.location.href = '../../views/employee.php?update_karyawan=sukses';
 						});
 					} else {
 						Swal.fire(
@@ -163,6 +163,7 @@ $layanan = mysqli_query($koneksi, $sql_q);
 							'Terjadi kesalahan saat melakukan update data.',
 							'error'
 						);
+						window.location.href = '../../views/employee.php?update_karyawan=gagal';
 					}
 				});
 		}

@@ -18,7 +18,7 @@ $query = mysqli_query($koneksi, $sql);
 			<h1><a href="../../index.php" class="logo">L.</a></h1>
 			<ul class="list-unstyled components mb-5">
 				<li class="active">
-					<a href="../../index.php"><span class="fa fa-home"></span> Home</a>
+					<a href="../../index.php"><span class="fa fa-home"></span> Beranda</a>
 				</li>
 				<li>
 					<a href="../../views/customer.php"><span class="fa fa-users"></span> Customer</a>
@@ -67,7 +67,7 @@ $query = mysqli_query($koneksi, $sql);
 				</div>
 				<div class="mb-3">
 					<label for="tgl" class="form-label">Tanggal Lahir</label>
-					<input type="text" class="form-control" name="tgl" id="tgl" placeholder="2023-06-12" required>
+					<input type="date" class="form-control" name="tgl" id="tgl" placeholder="2023-06-12" required>
 				</div>
 				<div class="mb-3 d-flex flex-column">
 					<label for="bdlayanan" class="form-label">Bidang Layanan</label>
@@ -134,7 +134,7 @@ $query = mysqli_query($koneksi, $sql);
 							'success'
 						).then((result) => {
 							// Redirect ke halaman lain setelah pengguna menekan OK
-							window.location.href = '../../views/employee.php';
+							window.location.href = '../../views/employee.php?tambah_karyawan=sukses';
 						});
 					} else {
 						Swal.fire(
@@ -142,6 +142,7 @@ $query = mysqli_query($koneksi, $sql);
 							'Terjadi kesalahan saat menyimpan data.',
 							'error'
 						);
+						window.location.href = '../../views/employee.php?tambah_karyawan=gagal';
 					}
 				});
 		}

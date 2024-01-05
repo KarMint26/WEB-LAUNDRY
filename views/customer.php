@@ -24,7 +24,7 @@ $count = 1;
 			<h1><a href="../index.php" class="logo">L.</a></h1>
 			<ul class="list-unstyled components mb-5">
 				<li class="active">
-					<a href="../index.php"><span class="fa fa-home"></span> Home</a>
+					<a href="../index.php"><span class="fa fa-home"></span> Beranda</a>
 				</li>
 				<li>
 					<a href="./customer.php"><span class="fa fa-users"></span> Customer</a>
@@ -70,7 +70,7 @@ $count = 1;
 						<div>Tambah Jenis Layanan</div>
 				</a>
 				</div>
-				<thead>
+				<thead class="thead-dark">
 					<tr>
 						<th scope="col">No</th>
 						<th scope="col">Nama</th>
@@ -142,7 +142,7 @@ $count = 1;
 							'success'
 						).then((result) => {
 							// Redirect ke halaman lain setelah pengguna menekan OK
-							window.location.href = '../views/customer.php';
+							window.location.href = '../views/customer.php?hapus_customer=sukses';
 						});
 					} else {
 						Swal.fire(
@@ -150,6 +150,7 @@ $count = 1;
 							'Terjadi kesalahan saat menghapus data.',
 							'error'
 						);
+						window.location.href = '../views/customer.php?hapus_customer=gagal';
 					}
 				});
 		}
