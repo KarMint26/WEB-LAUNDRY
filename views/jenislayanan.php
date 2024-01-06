@@ -7,6 +7,8 @@ $query = mysqli_query($koneksi, $sql);
 $count = 1;
 ?>
 
+<?php session_start(); ?>
+<?php if(isset($_SESSION['session_username'])) { ?>
 <?php require_once '../config/header.php' ?>
 <link rel="stylesheet" href="../css/style.css">
 <link rel="shortcut icon" href="../images/washing-machine.ico" type="image/x-icon">
@@ -32,6 +34,9 @@ $count = 1;
 				</li>
 				<li>
 					<a href="./pelayanan.php"><span class="fa fa-money"></span> Pelayanan</a>
+				</li>
+				<li>
+					<a href="../auth/logout.php"><span class="fa fa-sign-out"></span> Logout</a>
 				</li>
 			</ul>
 			<div class="footer">
@@ -102,11 +107,12 @@ $count = 1;
 							</a>
 						</td>
 					</tr>
-					<?php $count++; } ?>
+					<?php $count++;
+					} ?>
 				</tbody>
 			</table>
 		</div>
-		</div>
+	</div>
 	</div>
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/popper.js"></script>
@@ -147,3 +153,6 @@ $count = 1;
 		}
 	</script>
 	<?php require_once '../config/footer.php' ?>
+	<?php } else { ?>
+	<?php header("location: ../auth/login.php") ?>
+	<?php } ?>

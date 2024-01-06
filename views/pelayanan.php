@@ -31,6 +31,8 @@ $query = mysqli_query($koneksi, $sql);
 
 ?>
 
+<?php session_start(); ?>
+<?php if(isset($_SESSION['session_username'])) { ?>
 <?php require_once '../config/header.php' ?>
 <link rel="stylesheet" href="../css/style.css">
 <link rel="shortcut icon" href="../images/washing-machine.ico" type="image/x-icon">
@@ -56,6 +58,9 @@ $query = mysqli_query($koneksi, $sql);
 				</li>
 				<li>
 					<a href="./pelayanan.php"><span class="fa fa-money"></span> Pelayanan</a>
+				</li>
+				<li>
+					<a href="../auth/logout.php"><span class="fa fa-sign-out"></span> Logout</a>
 				</li>
 			</ul>
 			<div class="footer">
@@ -148,14 +153,15 @@ $query = mysqli_query($koneksi, $sql);
 						} ?>
 					</tbody>
 				</table>
-				<nav aria-label="Page navigation example" class="text-center" style="width: 600px; margin: 1rem auto 0;">
+				<nav aria-label="Page navigation example" class="text-center"
+					style="width: 600px; margin: 1rem auto 0;">
 					<h1 style="font-size: 1.5rem;">Navigation Page</h1>
 					<ul class="pagination justify-content-center flex-wrap" style="gap: .5rem;">
 						<?php
 						    for ($i = 1; $i <= $total_pages; $i++) {
 						        echo "<li class='page-item'><a class='page-link' href='?page=$i'>$i</a></li>";
 						    }
-?>
+    ?>
 					</ul>
 				</nav>
 			</div>
@@ -200,3 +206,6 @@ $query = mysqli_query($koneksi, $sql);
 		}
 	</script>
 	<?php require_once '../config/footer.php' ?>
+	<?php } else { ?>
+	<?php header("location: ../auth/login.php") ?>
+	<?php } ?>

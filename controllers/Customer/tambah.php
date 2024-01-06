@@ -6,6 +6,8 @@ $query = mysqli_query($koneksi, $sql);
 
 ?>
 
+<?php session_start(); ?>
+<?php if(isset($_SESSION['session_username'])) { ?>
 <?php require_once '../../config/header.php' ?>
 <link rel="stylesheet" href="../../css/style.css">
 <link rel="shortcut icon" href="../../images/washing-machine.ico" type="image/x-icon">
@@ -31,6 +33,9 @@ $query = mysqli_query($koneksi, $sql);
 				</li>
 				<li>
 					<a href="../../views/pelayanan.php"><span class="fa fa-money"></span> Pelayanan</a>
+				</li>
+				<li>
+					<a href="../../auth/logout.php"><span class="fa fa-sign-out"></span> Logout</a>
 				</li>
 			</ul>
 
@@ -69,7 +74,7 @@ $query = mysqli_query($koneksi, $sql);
 					<label for="alamat" class="form-label">Alamat</label>
 					<input type="text" class="form-control" name="alamat" id="alamat" placeholder="Jl. Sindoro No. 2">
 				</div>
-                <div class="mb-3">
+				<div class="mb-3">
 					<label for="kontak" class="form-label">Kontak</label>
 					<input type="number" class="form-control" name="kontak" id="kontak" placeholder="088809920021">
 				</div>
@@ -82,7 +87,7 @@ $query = mysqli_query($koneksi, $sql);
 					</select>
 				</div>
 				<div class="d-flex justify-content-end">
-				<button type="submit" class="btn btn-success d-flex align-items-center" style="gap: .5rem;">
+					<button type="submit" class="btn btn-success d-flex align-items-center" style="gap: .5rem;">
 						<i class="fa fa-save"></i>
 						<div>Simpan Data</div>
 					</button>
@@ -112,7 +117,8 @@ $query = mysqli_query($koneksi, $sql);
 					},
 					body: 'nama=' + encodeURIComponent(nama) + '&tgl_lahir=' + encodeURIComponent(tgl_lahir) +
 						'&alamat=' +
-						encodeURIComponent(alamat) +'&kontak=' + encodeURIComponent(kontak) + '&gender=' + encodeURIComponent(gender),
+						encodeURIComponent(alamat) + '&kontak=' + encodeURIComponent(kontak) + '&gender=' +
+						encodeURIComponent(gender),
 				})
 				.then(response => response.json())
 				.then(data => {
@@ -138,3 +144,6 @@ $query = mysqli_query($koneksi, $sql);
 		}
 	</script>
 	<?php require_once '../../config/footer.php' ?>
+	<?php } else { ?>
+	<?php header("location: ../../auth/login.php") ?>
+	<?php } ?>

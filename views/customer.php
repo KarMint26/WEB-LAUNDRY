@@ -1,5 +1,4 @@
 <?php
-require_once '../config/header.php';
 require_once '../db/Connection.php';
 
 $sql = "SELECT id_customer, nama_customer, alamat, tgl_lahir, kontak, CASE WHEN gender_id_gender = '1' THEN 'Laki-Laki' ELSE 'Perempuan' END AS gender FROM customer";
@@ -11,7 +10,8 @@ if (!$query) {
 
 $count = 1;
 ?>
-
+<?php session_start(); ?>
+<?php if(isset($_SESSION['session_username'])) { ?>
 <?php require_once '../config/header.php' ?>
 <link rel="stylesheet" href="../css/style.css">
 <link rel="shortcut icon" href="../images/washing-machine.ico" type="image/x-icon">
@@ -37,6 +37,9 @@ $count = 1;
 				</li>
 				<li>
 					<a href="./pelayanan.php"><span class="fa fa-money"></span> Pelayanan</a>
+				</li>
+				<li>
+					<a href="../auth/logout.php"><span class="fa fa-sign-out"></span> Logout</a>
 				</li>
 			</ul>
 
@@ -64,11 +67,11 @@ $count = 1;
 			<table class="table table-hover table-bordered table-md w-100 text-center">
 				<div class="w-100 d-flex justify-content-between mb-3" style="gap: 1rem;">
 					<div class="fs-2">Manajemen Data loundry customer Laundry</div>
-					<a href="../controllers/Customer/tambah.php"
-					class="btn btn-primary d-flex align-items-center" style="gap: .5rem;">
-					<i class="fa fa-plus"></i>
+					<a href="../controllers/Customer/tambah.php" class="btn btn-primary d-flex align-items-center"
+						style="gap: .5rem;">
+						<i class="fa fa-plus"></i>
 						<div>Tambah Jenis Layanan</div>
-				</a>
+					</a>
 				</div>
 				<thead class="thead-dark">
 					<tr>
@@ -111,7 +114,8 @@ $count = 1;
 							</a>
 						</td>
 					</tr>
-					<?php $count++; } ?>
+					<?php $count++;
+					} ?>
 				</tbody>
 			</table>
 		</div>
@@ -156,3 +160,6 @@ $count = 1;
 		}
 	</script>
 	<?php require_once '../config/footer.php' ?>
+	<?php } else { ?>
+	<?php header("location: ../auth/login.php") ?>
+	<?php } ?>

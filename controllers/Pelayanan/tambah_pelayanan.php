@@ -12,6 +12,8 @@ $query_3 = mysqli_query($koneksi, $sql_3);
 
 ?>
 
+<?php session_start(); ?>
+<?php if(isset($_SESSION['session_username'])) { ?>
 <?php require_once '../../config/header.php' ?>
 <link rel="stylesheet" href="../../css/style.css">
 <link rel="shortcut icon" href="../../images/washing-machine.ico" type="image/x-icon">
@@ -37,6 +39,9 @@ $query_3 = mysqli_query($koneksi, $sql_3);
 				</li>
 				<li>
 					<a href="../../views/pelayanan.php"><span class="fa fa-money"></span> Pelayanan</a>
+				</li>
+				<li>
+					<a href="../../auth/logout.php"><span class="fa fa-sign-out"></span> Logout</a>
 				</li>
 			</ul>
 
@@ -130,7 +135,8 @@ $query_3 = mysqli_query($koneksi, $sql_3);
 				</div>
 				<div class="mb-3">
 					<label for="tarif" class="form-label">Tarif Laundry</label>
-					<input type="number" class="form-control" name="tarif" id="tarif" placeholder="10000" required disabled>
+					<input type="number" class="form-control" name="tarif" id="tarif" placeholder="10000" required
+						disabled>
 				</div>
 				<div class="mb-3">
 					<label for="estimasi_hari" class="form-label">Estimasi Hari</label>
@@ -161,7 +167,7 @@ $query_3 = mysqli_query($koneksi, $sql_3);
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="../../js/main.js"></script>
 	<script>
-        // Penentuan karyawan yang akan memegang atau menghandle jenis layanan yang dipilih
+		// Penentuan karyawan yang akan memegang atau menghandle jenis layanan yang dipilih
 		document.getElementById('id_lyn').addEventListener('change', function() {
 			var selectedOption = this.options[this.selectedIndex];
 			var layananName = selectedOption.dataset.name;
@@ -189,7 +195,7 @@ $query_3 = mysqli_query($koneksi, $sql_3);
 				});
 		});
 
-        // Perhitungan Harga tergantung bobot
+		// Perhitungan Harga tergantung bobot
 		document.getElementById('bobot').addEventListener('change', function() {
 			var selectedOption = document.getElementById('id_lyn').options[document.getElementById('id_lyn')
 				.selectedIndex];
@@ -213,7 +219,7 @@ $query_3 = mysqli_query($koneksi, $sql_3);
 				});
 		});
 
-        // Tambah data
+		// Tambah data
 		async function submitForm() {
 			// Ambil data dari form
 			const tgl_pl = document.getElementById('tgl_pl').value;
@@ -260,9 +266,12 @@ $query_3 = mysqli_query($koneksi, $sql_3);
 							'Terjadi kesalahan saat menyimpan data.',
 							'error'
 						);
-                        window.location.href = '../../views/pelayanan.php?tambah_pelayanan=gagal';
+						window.location.href = '../../views/pelayanan.php?tambah_pelayanan=gagal';
 					}
 				});
 		}
 	</script>
 	<?php require_once '../../config/footer.php' ?>
+	<?php } else { ?>
+	<?php header("location: ../../auth/login.php") ?>
+	<?php } ?>

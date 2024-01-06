@@ -10,6 +10,8 @@ $layanan = mysqli_query($koneksi, $sql_q);
 
 ?>
 
+<?php session_start(); ?>
+<?php if(isset($_SESSION['session_username'])) { ?>
 <?php require_once '../../config/header.php' ?>
 <link rel="stylesheet" href="../../css/style.css">
 <link rel="shortcut icon" href="../../images/washing-machine.ico" type="image/x-icon">
@@ -35,6 +37,9 @@ $layanan = mysqli_query($koneksi, $sql_q);
 				</li>
 				<li>
 					<a href="../../views/pelayanan.php"><span class="fa fa-money"></span> Pelayanan</a>
+				</li>
+				<li>
+					<a href="../../auth/logout.php"><span class="fa fa-sign-out"></span> Logout</a>
 				</li>
 			</ul>
 
@@ -169,3 +174,6 @@ $layanan = mysqli_query($koneksi, $sql_q);
 		}
 	</script>
 	<?php require_once '../../config/footer.php' ?>
+	<?php } else { ?>
+	<?php header("location: ../../auth/login.php") ?>
+	<?php } ?>
