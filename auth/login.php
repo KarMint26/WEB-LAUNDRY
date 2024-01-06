@@ -86,5 +86,5 @@ if(isset($_POST['login'])){
 	</script>
 	<?php require_once '../config/footer.php' ?>
 	<?php } else {
-		header("location:../index.php");
+		header("location:../");
 	} ?>

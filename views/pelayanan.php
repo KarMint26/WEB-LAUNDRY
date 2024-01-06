@@ -42,10 +42,10 @@ $query = mysqli_query($koneksi, $sql);
 <body>
 	<div class="wrapper d-flex align-items-stretch">
 		<nav id="sidebar" class="active">
-			<h1><a href="../index.php" class="logo">L.</a></h1>
+			<h1><a href="../" class="logo">L.</a></h1>
 			<ul class="list-unstyled components mb-5">
 				<li class="active">
-					<a href="../index.php"><span class="fa fa-home"></span> Beranda</a>
+					<a href="../"><span class="fa fa-home"></span> Beranda</a>
 				</li>
 				<li>
 					<a href="./customer.php"><span class="fa fa-users"></span> Customer</a>
@@ -83,11 +83,11 @@ $query = mysqli_query($koneksi, $sql);
 				</div>
 			</nav>
 
-			<h2 class="mb-4">Pelayanan</h2>
+			<h2 class="mb-4">Pelayanan Laundry</h2>
 			<div class="table-responsive">
 				<table class="table table-hover table-bordered table-md w-100 text-center">
 					<div class="w-100 d-flex justify-content-between mb-3" style="gap: 1rem;">
-						<div class="fs-2">Manajemen Data Karyawan Laundry</div>
+						<div class="fs-2">Manajemen Data Pelayanan Laundry</div>
 						<a href="../controllers/Pelayanan/tambah_pelayanan.php"
 							class="btn btn-primary d-flex align-items-center" style="gap: .5rem;">
 							<i class="fa fa-plus"></i>

@@ -9,10 +9,10 @@
 <body>
 	<div class="wrapper d-flex align-items-stretch">
 		<nav id="sidebar" class="active">
-			<h1><a href="../index.php" class="logo">L.</a></h1>
+			<h1><a href="../../" class="logo">L.</a></h1>
 			<ul class="list-unstyled components mb-5">
 				<li class="active">
-					<a href="../../index.php"><span class="fa fa-home"></span> Beranda</a>
+					<a href="../../"><span class="fa fa-home"></span> Beranda</a>
 				</li>
 				<li>
 					<a href="../../views/customer.php"><span class="fa fa-users"></span> Customer</a>
@@ -72,7 +72,10 @@
 						placeholder="Pencucian pakaian menggunakan deterjen biasa tanpa perlakuan khusus.">
 				</div>
 				<div class="d-flex justify-content-end">
-					<button type="submit" class="btn btn-success">Simpan</button>
+					<button type="submit" class="btn btn-success d-flex align-items-center" style="gap: .5rem;">
+						<i class="fa fa-save"></i>
+						<div>Simpan Jenis Layanan</div>
+					</button>
 				</div>
 			</form>
 		</div>
