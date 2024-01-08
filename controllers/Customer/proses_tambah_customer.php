@@ -17,9 +17,7 @@ if ($result) {
 
     $id_customer = $max_id + 1;
 
-
     $sql = "INSERT INTO customer (id_customer, nama_customer, tgl_lahir, alamat, kontak, gender_id_gender) VALUES ('$id_customer', '$nama', '$tgl_lahir', '$alamat', '$kontak', '$gender')";
-
 
     $query = mysqli_query($koneksi, $sql);
 

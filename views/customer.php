@@ -77,8 +77,8 @@ $count = 1;
 					<tr>
 						<th scope="col">No</th>
 						<th scope="col">Nama</th>
-						<th scope="col">Tanggal Lahir</th>
 						<th scope="col">Alamat</th>
+						<th scope="col">Tanggal Lahir</th>
 						<th scope="col">Kontak</th>
 						<th scope="col">Gender</th>
 						<th scope="col">Aksi</th>
@@ -127,7 +127,6 @@ $count = 1;
 	<script src="../js/main.js"></script>
 	<script>
 		async function deleteData(idcs) {
-			// Kirim permintaan AJAX ke server
 			// Kirim permintaan AJAX ke server
 			await fetch('../controllers/Customer/hapus_customer.php', {
 					method: 'POST',

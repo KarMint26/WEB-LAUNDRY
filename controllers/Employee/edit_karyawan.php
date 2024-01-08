@@ -81,7 +81,7 @@ $layanan = mysqli_query($koneksi, $sql_q);
 				</div>
 				<div class="mb-3">
 					<label for="tgl" class="form-label">Tanggal Lahir</label>
-					<input type="text" class="form-control" name="tgl" id="tgl" placeholder="2023-06-12"
+					<input type="date" class="form-control" name="tgl" id="tgl" placeholder="2023-06-12"
 						value="<?= $karyawan['tgl_lahir'] ?>">
 				</div>
 				<div class="mb-3 d-flex flex-column">

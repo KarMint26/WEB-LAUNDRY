@@ -69,7 +69,7 @@ $query = mysqli_query($koneksi, $sql);
 				<div class="mb-3 mt-3">
 					<label for="nama" class="form-label">Nama</label>
 					<input type="text" class="form-control" name="nama" id="nama" placeholder="John Doe"
-						value="<?=  $customer['nama_customer'] ?>">
+						value="<?= $customer['nama_customer'] ?>">
 				</div>
 				<div class="mb-3">
 					<label for="tgl_lahir" class="form-label">Tanggal Lahir</label>

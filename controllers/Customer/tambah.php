@@ -1,11 +1,3 @@
-<?php
-
-require_once '../../db/Connection.php';
-$sql = "SELECT id_customer, nama_customer FROM customer";
-$query = mysqli_query($koneksi, $sql);
-
-?>
-
 <?php session_start(); ?>
 <?php if(isset($_SESSION['session_username'])) { ?>
 <?php require_once '../../config/header.php' ?>
@@ -60,27 +52,27 @@ $query = mysqli_query($koneksi, $sql);
 			</nav>
 
 			<h2 class="mb-4">Tambah Customer Laundry</h2>
-			<form action="./proses_tambah.php" method="POST" onsubmit="event.preventDefault(); submitForm();">
+			<form method="POST" onsubmit="event.preventDefault(); submitForm();">
 
 				<div class="mb-3 mt-3">
 					<label for="nama" class="form-label">Nama</label>
-					<input type="text" class="form-control" name="nama" id="nama" placeholder="John Doe">
+					<input type="text" class="form-control" name="nama" id="nama" placeholder="John Doe" required>
 				</div>
 				<div class="mb-3">
 					<label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
-					<input type="date" class="form-control" name="tgl_lahir" id="tgl_lahir" placeholder="20-01-1993">
+					<input type="date" class="form-control" name="tgl_lahir" id="tgl_lahir" placeholder="20-01-1993" required>
 				</div>
 				<div class="mb-3">
 					<label for="alamat" class="form-label">Alamat</label>
-					<input type="text" class="form-control" name="alamat" id="alamat" placeholder="Jl. Sindoro No. 2">
+					<input type="text" class="form-control" name="alamat" id="alamat" placeholder="Jl. Sindoro No. 2" required>
 				</div>
 				<div class="mb-3">
 					<label for="kontak" class="form-label">Kontak</label>
-					<input type="number" class="form-control" name="kontak" id="kontak" placeholder="088809920021">
+					<input type="number" class="form-control" name="kontak" id="kontak" placeholder="088809920021" required>
 				</div>
 				<div class="mb-3 d-flex flex-column">
 					<label for="gender" class="form-label">Jenis Kelamin</label>
-					<select class="custom-select" aria-label="Default select example" id="gender" name="gender">
+					<select class="custom-select" aria-label="Default select example" id="gender" name="gender" required>
 						<option selected disabled>Pilih Jenis Kelamin</option>
 						<option value="0">Perempuan</option>
 						<option value="1">Laki-Laki</option>

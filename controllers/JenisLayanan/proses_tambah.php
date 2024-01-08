@@ -7,7 +7,6 @@ $harga = $_POST['harga'];
 $estimasi_hari = $_POST['estimasihari'];
 $deskripsi = $_POST['deskripsi'];
 
-
 // Mendapatkan nilai maksimum id_layanan dari tabel jenis_layanan
 $sql_max_id = "SELECT MAX(id_layanan)  AS max_id FROM jenis_layanan";
 $result = mysqli_query($koneksi, $sql_max_id);

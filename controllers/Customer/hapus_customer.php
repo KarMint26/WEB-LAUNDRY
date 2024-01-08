@@ -13,8 +13,8 @@ if (mysqli_num_rows($query_check_association) > 0) {
 
     if (!$query_delete_pelayanan) {
    
-        header("location: ../../views/customer.php?hapus=gagal_pelayanan");
-        exit();
+        // header("location: ../../views/customer.php?hapus=gagal_pelayanan");
+        // exit();
     }
 }
 
